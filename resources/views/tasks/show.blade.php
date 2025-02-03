@@ -9,10 +9,10 @@
                 <p class="card-text">{{ $task->description }}</p>
                 <p class="card-text">
                     <strong>Status:</strong> 
-                    @if($task->status == 0)
-                        <span class="badge badge-warning">Pending</span>
+                    @if($task->status == 0 || $task->status === 'pending')
+                        <span class="badge bg-warning text-dark">Pending</span>
                     @else
-                        <span class="badge badge-success">Completed</span>
+                        <span class="badge bg-success">Completed</span>
                     @endif
                 </p>
                 <p class="card-text">
@@ -20,10 +20,10 @@
                 </p>
                 <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-primary">Edit Task</a>
                 <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Back</a>
-                <form action="{{ route('tasks.destroy', $task) }}" method="POST">
+                <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
-                   <button type="submit">Delete</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>

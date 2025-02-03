@@ -25,4 +25,10 @@ class Task extends Model
     {
         return $query->where('status', 'completed');
     }
+
+    public function getStatusLabel()
+    {
+         return $this->status == 0 ? 'Pending' : 'Completed';
+    }
+
 }
