@@ -95,7 +95,7 @@ Swagger documentation is available at:
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-> I will like to thank Gloztec Solution for this opportunity giving to me to work on this project.
+> I will like to thank Gloztec Solutions for this opportunity giving to me to work on this project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
