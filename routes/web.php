@@ -8,7 +8,6 @@ Route::get('login', [App\Http\Controllers\Auth\LoginController::class, 'showLogi
 Route::post('login', [App\Http\Controllers\Auth\LoginController::class, 'login']);
 Route::get('register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
 
-// Add the POST route for handling registration form submission
 Route::post('register', [App\Http\Controllers\Auth\RegisterController::class, 'register']);
 
 Route::post('/logout', function () {
