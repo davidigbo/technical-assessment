@@ -1,51 +1,85 @@
 <?php
 
-namespace App\Https\Controllers;
+namespace App\Http\Controllers;
 
-use Illuminate\Https\Request;
+use Illuminate\Http\Request;
 use App\Models\Task;
-use DB;
+use Illuminate\Support\Facades\Validator;
 
 class BuggyTaskController extends Controller
 {
-    // No authentication middleware
+   
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+    }
 
     public function index()
     {
-        $tasks = Task::all(); 
-
+        $tasks = Task::all();
         return response()->json($tasks);
     }
 
     public function store(Request $request)
     {
-        $task = new Task();
-        $task->title = $request->title;
-        $task->description = $request->description;
-        $task->status = $request->status;
-        $task->due_date = $request->due_date;
-        $task->save();
-        
-        return response()->json($task);
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'status' => 'required|in:pending,completed',
+            'due_date' => 'required|date|after:today',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $task = Task::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+            'due_date' => $request->due_date,
+        ]);
+
+        return response()->json($task, 201); 
     }
 
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:255',
+            'status' => 'required|in:pending,completed',
+            'due_date' => 'required|date|after:today',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
         $task = Task::find($id);
-        
-        $task->title = $request->title; 
-        $task->description = $request->description;
-        $task->status = $request->status;
-        $task->due_date = $request->due_date;
-        $task->save();
+
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
+        }
+
+        $task->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+            'due_date' => $request->due_date,
+        ]);
 
         return response()->json($task);
     }
 
     public function destroy($id)
     {
-        Task::destroy($id); 
+        $task = Task::find($id);
 
-        return response()->json(["message" => "Task deleted"]);
+        if (!$task) {
+            return response()->json(['message' => 'Task not found'], 404);
+        }
+
+        $task->delete();
+        return response()->json(['message' => 'Task deleted'], 200); // Return success message
     }
 }
