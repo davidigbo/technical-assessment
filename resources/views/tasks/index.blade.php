@@ -6,7 +6,7 @@
 
   <ul>
      @foreach($tasks as $task)
-        <li>
+        <li class="mt-3">
             <a href="{{ route('tasks.show', $task->id) }}">{{ $task->title }}</a>
             ({{ $task->status }})
 
