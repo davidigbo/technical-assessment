@@ -19,12 +19,12 @@ class ProductApiTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => "Bearer $token"
         ])->postJson('/api/products', [
-            'name' => 'Test Product',
-            'price' => 50.99,
+            'name' => 'Shoes',
+            'price' => 100.50,
             'stock' => 10
         ]);
 
         $response->assertStatus(201);
-        $this->assertDatabaseHas('products', ['name' => 'Test Product']);
+        $this->assertDatabaseHas('products', ['name' => 'Shoes']);
     }
 }
