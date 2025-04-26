@@ -6,7 +6,6 @@ This repository contains the Laravel Developer Assessment, covering:
 3. **Debugging & Optimization (Bug Fixes)**
 4. **Git Best Practices (Feature Branch & PR)**
 5. **SQL Queries for E-commerce Reports**
-
 ---
 
 ## **🚀 Project Setup & Installation**
