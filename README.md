@@ -12,7 +12,7 @@ This repository contains the Laravel Developer Assessment, covering:
 ## Clone the Repository
 - git clone git@github.com:davidigbo/technical-assessment.git
 - cd technical-assessment
-
+- 
 ## Install Dependencies
 Ensure you have Composer installed, then run:
 - composer install
