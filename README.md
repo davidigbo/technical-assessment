@@ -16,7 +16,7 @@ This repository contains the Laravel Developer Assessment, covering:
 ## Install Dependencies
 Ensure you have Composer installed, then run:
 - composer install
-
+- 
 ## Configure the Environment
 - Copy the .env.example file and update your database credentials.
 - cp .env.example .env
